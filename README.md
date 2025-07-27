@@ -1,2 +1,2 @@
 # Loan-Management-App
-A collaborative project by Team horizons.
+A collaborative project by horizon Team.
