@@ -53,9 +53,9 @@ git commit -m "your commit message"
    
 2.Visit the GitHub repository in your browser,
 
-3.You’ll see a prompt to "Compare & pull request" — click it.
-3.Add a title and description for your work.
-4. wait for review before merging.
+3.You’ll see a prompt to "Compare & pull request" — click it, 
+4.Add a title and description for your work, 
+5. wait for review before merging.
 
 ## ❗ Troubleshooting
 -Always create a new branch before working, never commit directly to main.
