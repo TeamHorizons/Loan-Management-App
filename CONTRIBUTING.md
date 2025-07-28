@@ -16,7 +16,7 @@ This guide walks you through the correct steps to create your branch, push your 
 ```bash
 git clone https://github.com/YOUR_ORG/YOUR_REPO.git
 ```
-## Navigate into the directory that was creates after cloning in your IDE(text-editor)
+## Navigate into the directory that was created after cloning in your IDE(text-editor)
 ```
 cd your-repo
 ```
