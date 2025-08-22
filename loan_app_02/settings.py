@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-# from decouple import *
 from decouple import config
 from pathlib import Path
 import os
@@ -40,8 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
+    'borrower.apps.BorrowerConfig',
+    'document.apps.DocumentConfig',
+    'kyc.apps.KycConfig',
+    'emi',
+    'loan_ticket.apps.LoanTicketConfig',
+    'payment.apps.PaymentConfig',
+    'penalty',
     'user',
-
     # third party dependencies
     'crispy_forms',
     'crispy_bootstrap5',
@@ -53,9 +58,12 @@ Tell crispy to use the bootstrap 5 templates
 """
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
-
 CRISPY_FAIL_SILENTLY = not DEBUG
 
+
+"""
+Setting a custom user model as the authenticator user model
+"""
 AUTH_USER_MODEL = 'user.UserProfile'
 
 MIDDLEWARE = [
