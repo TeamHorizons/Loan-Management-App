@@ -33,7 +33,7 @@ class UserProfile(AbstractUser):
                                     ) 
     
     USERNAME_FIELD = "email"       # this tells Django to use email for login
-    REQUIRED_FIELDS = []  # Don’t force phone_number when creating superuser
+    REQUIRED_FIELDS = ['username']  # Don’t force phone_number when creating superuser
 
 
     def __str__(self):
