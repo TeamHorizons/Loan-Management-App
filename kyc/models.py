@@ -1,6 +1,5 @@
 
 from django.db import models
-from django.utils import timezone
 from borrower.models import Borrower
 from document.models import Document
 
