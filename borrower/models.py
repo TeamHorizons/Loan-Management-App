@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 import json # For handling array-like fields for non-PostgreSQL databases
 
+from django.conf import settings
 # Create your models here.
 
 # Borrower Model
@@ -11,6 +12,11 @@ class Borrower(models.Model):
     Represents a borrower in the loan application.
     Corresponds to the `borrower` table.
     """
+    """
+    settings.AUTH_USER_MODEL links to the custom user models ensures compatibility,
+    links borrower to a single user account.
+    """
+    user_profile = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     first_name = models.CharField(max_length=50, null=False, blank=False)
     last_name = models.CharField(max_length=50, null=False, blank=False)
     # Using BigIntegerField for mobile numbers to avoid integer overflow issues

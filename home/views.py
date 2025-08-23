@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.admin.views.decorators import staff_member_required
 """
 Import Models
 """
@@ -12,6 +12,7 @@ from loan_ticket.models import LoanTicket
 # Create your views here.
 
 # Home View
+@staff_member_required(login_url='home')
 def admin_index(request):
     """
     Renders the home page of the loan application.
@@ -38,6 +39,7 @@ def home(request):
     return render(request, template_name='home/index.html', context={'title':template_data})
 
 
+@login_required(login_url='login')
 def apply_for_loan(request):
     template_data = {}
     template_data['title'] = 'Loan Management App'

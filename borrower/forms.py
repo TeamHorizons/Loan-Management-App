@@ -6,6 +6,7 @@ class BorrowerForm(forms.ModelForm):
         model = Borrower
         fields = '__all__' # Include all fields from the model
         widgets = {
+            'user_profile':forms.Select(attrs={'class': 'form-control'}),
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'mobile': forms.TextInput(attrs={'class': 'form-control'}),
