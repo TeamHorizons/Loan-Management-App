@@ -3,6 +3,17 @@
 {%load crispy_forms_tags%}
 
 {%block content%}
+
+{%if messages%}
+    <div class="message mt-3 container">
+        {%for message in messages%}
+        <div class="alert alert-{{message.tags}}">
+            {{message}}
+        </div>
+        {%endfor%}
+    </div>
+{%endif%}
+
 <div class="container border rounded-5 p-5">
     <div class="row justify-content-center">
         <h1 class="text-center fw-bold">Login</h1>
@@ -11,15 +22,6 @@
             {%crispy login_form%}
         </form>
     </div>
-    {%if messages%}
-<div class="message mt-3">
-    {%for message in messages%}
-    <div class="alert alert-{{message.tags}}">
-        {{message}}
-    </div>
-    {%endfor%}
-</div>
-{%endif%}
 </div>
 
 

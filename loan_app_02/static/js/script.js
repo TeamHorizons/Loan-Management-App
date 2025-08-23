@@ -8,3 +8,4 @@ document.addEventListener("DOMContentLoaded", function(){
     currentYear = new Date().getFullYear();
     currentYearSpan.innerHTML = `&copy; ${currentYear} Loan Management App. All rights reserved.`;
 })
+
