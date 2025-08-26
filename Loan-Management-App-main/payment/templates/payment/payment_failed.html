@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="alert alert-danger">
+    <h3>Payment Failed!</h3>
+    <p>{{ response.message }}</p>
+</div>
+<a href="{% url 'make_payment' %}" class="btn btn-warning">Try Again</a>
+{% endblock %}

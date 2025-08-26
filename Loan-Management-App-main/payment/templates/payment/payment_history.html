@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Payment History</h2>
+
+    {% if payments %}
+    <table class="table table-striped shadow">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Amount (₦)</th>
+                <th>Email</th>
+                <th>Payment Mode</th>
+                <th>Reference</th>
+                <th>Date</th>
+                <th>Remark</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in payments %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ p.amount }}</td>
+                <td>{{ p.email }}</td>
+                <td>{{ p.payment_mode }}</td>
+                <td>{{ p.bank_reference_id }}</td>
+                <td>{{ p.payment_date|date:"Y-m-d H:i" }}</td>
+                <td>{{ p.remark }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-info">No payments made yet.</div>
+    {% endif %}
+</div>
+{% endblock %}

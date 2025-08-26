@@ -1,0 +1,26 @@
+{%extends 'main.html' %}
+{%load static%}
+{%block content%}
+    {%if messages%}
+        <div class="message mb-3 container">
+            {%for message in messages%}
+            <div class="alert alert-{{message.tags}}">
+                {{message}}
+            </div>
+            {%endfor%}
+        </div>
+    {%endif%}
+
+        <div class="container d-flex align-items-center justify-content-around hero">
+            <div class="hero-text">
+                <h1 class="text-dark">Welcome to Loan Management App</h1>
+                <p class="fw-semibold">Providing you with accessable loans at all times</p>
+                <a href="{%url 'next_action'%}" class="btn btn-outline-info hero-btn fw-semibold px-3">Apply For Loan</a>
+            </div>
+
+            <div class="hero-img">
+                <img src="{%static 'images/loan-man.jpg'%}" alt="image of a loan advisor" class="img">
+
+            </div>
+        </div>
+{%endblock content%}

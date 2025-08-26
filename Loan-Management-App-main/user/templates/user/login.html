@@ -1,0 +1,29 @@
+{%extends 'main.html' %}
+
+{%load crispy_forms_tags%}
+
+{%block content%}
+
+{%if messages%}
+    <div class="message mt-3 container">
+        {%for message in messages%}
+        <div class="alert alert-{{message.tags}}">
+            {{message}}
+        </div>
+        {%endfor%}
+    </div>
+{%endif%}
+
+<div class="container border rounded-5 p-5">
+    <div class="row justify-content-center">
+        <h1 class="text-center fw-bold">Login</h1>
+        <form action="#" method="post" class="mt-4" novalidate >
+            {%csrf_token%}
+            {%crispy login_form%}
+        </form>
+    </div>
+</div>
+
+
+
+{%endblock content%}

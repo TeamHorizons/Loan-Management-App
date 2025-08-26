@@ -1,0 +1,12 @@
+#environment
+.env
+
+# django
+db.sqlite3
+
+# virtual environment
+.venv/
+
+# Python compiled files
+*.pyc
+__pycache__/
