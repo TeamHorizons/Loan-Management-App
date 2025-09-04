@@ -1,0 +1,59 @@
+{%extends "main.html"%}
+
+{%load static%}
+
+{%block content%}
+
+
+<div class="container">
+    <div class="border rounded-3 text-center mb-3" style="background-color:#f1f1f1;">
+    </div>
+
+    <!-- Borrower Info Card -->
+    <div class="profile-card">
+        <h2>Borrower Info</h2>
+        {% if borrower_info %}
+        <div class="row g-3">
+            <div class="col-md-6 rounded-2 p-3" style="border: 1px solid #000;">
+                <h4>Personal Details</h4>
+                <p><strong>user_profile:</strong> {{ borrower_info.user_profile }}</p>
+                <p><strong>First Name:</strong> {{ borrower_info.first_name }}</p>
+                <p><strong>Last Name:</strong> {{ borrower_info.last_name}}</p>
+                <p><strong>Mobile:</strong> {{ borrower_info.mobile}}</p>
+                <p><strong>Alternate Mobile:</strong> {{ borrower_info.alternate_mobile }}</p>
+                <p><strong>State:</strong> {{ borrower_info.state }}</p>
+                <p><strong>District:</strong> {{ borrower_info.district }}</p>
+                <p><strong>Pincode:</strong> {{ borrower_info.pincode }}</p>
+                <p><strong>Address:</strong> {{ borrower_info.address }}</p>
+            </div>
+            <div class="col-md-6 rounded-2 p-3" style="border: 1px solid #000;">
+                <h4>Bank Details</h4>
+                <p><strong>Account Number:</strong> {{ borrower_info.account_number }}</p>
+                <p><strong>Ifsc Code:</strong> {{ borrower_info.ifsc_code}}</p>
+                <p><strong>Bank Name:</strong> {{ borrower_info.bank_name }}</p>
+                <p><strong>Branch Name:</strong> {{ borrower_info.branch_name }}</p>
+            </div>
+        </div>
+
+        {% else %}
+            <p>No borrower information submitted yet.</p>
+        {% endif %}
+    </div>
+
+    <!--  Loans profile-card -->
+    <!-- <div class="profile-card">
+        <h2>Loans</h2>
+        {% if loans %}
+            <ul>
+                {% for loan in loans %}
+                    <li><strong>{{ loan.loan_type }}</strong> - {{ loan.loan_amount }} - {{ loan.status }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No loans submitted yet.</p>
+        {% endif %}
+    </div> -->
+</div>
+
+
+{%endblock content%}

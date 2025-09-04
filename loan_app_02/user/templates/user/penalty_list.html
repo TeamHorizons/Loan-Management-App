@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+{%load crispy_forms_tags%}
+{% block content %}
+<div class="container">
+    <h2>Your Penalties</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>EMI</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Due Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for penalty in penalties %}
+            <tr>
+                <td>{{ penalty.emi.emi_no }}</td>
+                <td>{{ penalty.amount }}</td>
+                <td>{{ penalty.status }}</td>
+                <td>{{ penalty.due_date|date:"Y-m-d" }}</td>
+                <td>
+                    <a href="{% url 'penalty_detail' penalty.pk %}" class="btn btn-primary btn-sm">View</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="5">No penalties found.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

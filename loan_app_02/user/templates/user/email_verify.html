@@ -1,0 +1,17 @@
+{%extends "main.html"%}
+
+{%block content%}
+
+<div class="container mt-3">
+    {%if messages%}
+        <div class="message">
+            {%for message in messages%}
+            <div class="alert alert-{{message.tags}}">
+                {{message}}
+            </div>
+            {%endfor%}
+        </div>
+    {%endif%}
+</div>
+
+{%endblock content%}

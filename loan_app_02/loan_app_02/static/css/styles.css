@@ -3,17 +3,30 @@ body {
     background-color: #f8f9fa;
     }
 
-
 .navbar {
     box-shadow: 0 2px 4px rgba(0,0,0,.05);
     }
 
+.admin-panel{
+    background:none; 
+    border:none;
+    padding:0;
+    text-align: center;
+}
+
+.admin-logout{
+    background:none; 
+    border:none;
+    padding:0;
+    text-align: center;
+}
+
 
 .card {
-    
     border-radius: 0.75rem; /* Rounded corners */
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
     }
+    
 #theme-toggle{
     border-radius: 5rem;
 }
@@ -46,7 +59,10 @@ body {
     bottom: 0;
     width: 100%;
     }
+/*  */
 
+
+/* User front style */
 .hero{
     border: 1px solid rgb(10, 22, 23);
     border-radius: 20px;
@@ -88,3 +104,21 @@ img.img{
 .header-nav:hover::after {
     width: 100%;
 }
+
+.asteriskField {
+    display: none;
+}
+
+
+/* Profile page styles */
+.profile-card { 
+    background-color:#f1f1f1; 
+    padding: 20px; 
+    margin-bottom: 20px; 
+    border-radius: 10px; 
+    box-shadow: 0 0 5px 5px rgba(0,0,0,0.1);
+    text-align: center;
+    }
+.profile-card h2 { 
+    margin-top: 0; 
+    } 

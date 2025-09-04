@@ -1,0 +1,45 @@
+{% extends "main.html" %}
+{%load crispy_forms_tags%}
+{% block content %}
+<div class="card shadow-sm mx-auto" style="max-width: 700px;">
+    <div class="card-header bg-primary text-white">
+        <h2 class="fw-semibold text-center">Make EMI Payment</h2>
+    </div>
+    
+    <form method="POST" class="mt-2 p-5">
+        {% csrf_token %}
+        <div class="row">
+            <!-- Hidden or auto-filled fields -->
+            {{ form.loan_ticket }}
+            {{ form.emi_no }}
+            {{ form.outstanding_amount }}
+            {{ form.penalty }}
+
+            <!-- Visible to user -->
+            <div class="col-lg- col-md-6 mb-3">
+                {{ form.emi_amount.label_tag }} 
+                {{ form.emi_amount }}
+            </div>
+            <div class="col col-md-6 mb-3">
+                {{ form.payment.label_tag }} 
+                {{ form.payment }}
+            </div>
+            <div class="col col-md-6 mb-3">
+                {{ form.end_date.label_tag }} 
+                {{ form.end_date }}
+            </div>
+            <div class="mb-3">
+                {{ form.remark.label_tag }} 
+                {{ form.remark }}
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-info">
+                <i class="fas fa-save me-2"></i>Submit Payment</button>
+            <a href="{% url 'emi_submit' %}" class="btn btn-secondary">
+                <i class="fas fa-times-circle me-2"></i>Cancel
+            </a>
+        </div>
+
+{% endblock %}

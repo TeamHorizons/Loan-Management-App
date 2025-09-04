@@ -1,0 +1,60 @@
+{% extends 'main.html' %}
+{%load crispy_forms_tags%}
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h2 class="fw-semibold text-center">Apply for a Loan</h2>
+        </div>
+        <div class="card-body">
+            <form method="post" novalidate>
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ form.loan_type.id_for_label }}" class="form-label">Loan Type</label>
+                        {{ form.loan_type }}
+                        {% if form.loan_type.errors %}
+                            <div class="text-danger small">{{ form.loan_type.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ form.loan_amount.id_for_label }}" class="form-label">Loan Amount</label>
+                        {{ form.loan_amount }}
+                        {% if form.loan_amount.errors %}
+                            <div class="text-danger small">{{ form.loan_amount.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ form.loan_tenure_in_months.id_for_label }}" class="form-label">Tenure (Months)</label>
+                        {{ form.loan_tenure_in_months }}
+                        {% if form.loan_tenure_in_months.errors %}
+                            <div class="text-danger small">{{ form.loan_tenure_in_months.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ form.start_date.id_for_label }}" class="form-label">Start Date</label>
+                        {{ form.start_date }}
+                        {% if form.start_date.errors %}
+                            <div class="text-danger small">{{ form.start_date.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-info">
+                        <i class="fas fa-save me-2"></i>Submit Loan Request
+                    </button>
+                    <a href="{% url 'loan_ticket_list' %}" class="btn btn-secondary">
+                        <i class="fas fa-times-circle me-2"></i>Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

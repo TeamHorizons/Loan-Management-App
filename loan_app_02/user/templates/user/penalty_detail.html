@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+{%load crispy_forms_tags%}
+{% block content %}
+<div class="container">
+    <h2>Penalty Detail</h2>
+    <p><strong>EMI:</strong> {{ penalty.emi.emi_no }}</p>
+    <p><strong>Amount:</strong> {{ penalty.amount }}</p>
+    <p><strong>Status:</strong> {{ penalty.status }}</p>
+    <p><strong>Due Date:</strong> {{ penalty.due_date|date:"Y-m-d H:i" }}</p>
+
+    <h4>Remark</h4>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Save Remark</button>
+    </form>
+
+    <a href="{% url 'penalty_list' %}" class="btn btn-secondary mt-2">Back</a>
+</div>
+{% endblock %}

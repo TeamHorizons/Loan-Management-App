@@ -1,0 +1,55 @@
+{% extends "main.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="card shadow-lg rounded-3">
+        <div class="card-header bg-gradient bg-primary text-white text-center py-3">
+            <h3 class="mb-0">📅 EMI Schedule for Loan #{{ loan.id }}</h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">EMI No</th>
+                            <th scope="col">Amount (₦)</th>
+                            <th scope="col">Outstanding (₦)</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">End Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for emi in emis %}
+                        <tr>
+                            <td><span class="badge bg-secondary">{{ emi.emi_no }}</span></td>
+                            <td><strong>${{ emi.emi_amount|floatformat:2 }}</strong></td>
+                            <td>${{ emi.outstanding_amount|floatformat:2 }}</td>
+                            <td>
+                                {% if emi.status == "Paid" %}
+                                    <span class="badge bg-success">Paid</span>
+                                {% elif emi.status == "Pending" %}
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Overdue</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ emi.start_date|date:"M d, Y" }}</td>
+                            <td>{{ emi.end_date|date:"M d, Y" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="text-muted">No EMI records available.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer text-center text-muted">
+            Last updated: {{ now|date:"M d, Y H:i" }}
+        </div>
+    </div>
+</div>
+
+{%endblock content%}
