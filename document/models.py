@@ -1,25 +1,41 @@
 from django.db import models
-from django.utils import timezone
-import json # For handling array-like fields for non-PostgreSQL databases
+from borrower.models import Borrower
+
 
 # Create your models here.
 
+DOCUMENT_CATEGORY_CHOICES = [
+    ('identity', 'Proof of Identity'),
+    ('address', 'Proof of Address'),
+]
+
+DOCUMENT_CHOICES = [
+    # Identity
+    ("NIN", "National ID Card / NIN Slip"),
+    ("BVN", "BVN Confirmation Document"),
+    ("PASSPORT", "International Passport"),
+    ("PHOTO", "Passport Photograph"),
+    ("DL", "Driver's License"),
+
+    # Address
+    ("PVC", "Permanent Voter's Card"),
+    ("UTILITY", "Utility Bill"),
+
+]
 
 # Document Model
 class Document(models.Model):
-    """
-    Represents a document type.
-    Corresponds to the `documents` table.
-    """
-    document_name = models.CharField(max_length=50, null=False, blank=False)
-    # dcoument_folder is likely a path or category, using CharField
-    document_folder = models.CharField(max_length=255, null=False, blank=False)
+    borrower = models.ForeignKey(Borrower, on_delete=models.CASCADE, related_name='document_details', default=1)
+    document_category = models.CharField(max_length=50, choices=DOCUMENT_CATEGORY_CHOICES, default='identity')
+    document_type = models.CharField(max_length=150, choices=DOCUMENT_CHOICES, default='NIN')
     created_at = models.DateTimeField(auto_now_add=True)
+
+
 
     class Meta:
         verbose_name = "Document"
         verbose_name_plural = "Documents"
-        ordering = ['document_name']
+        ordering = ['-created_at']
 
     def __str__(self):
-        return self.document_name
+        return f"{self.get_document_type_display()}-{self.get_document_category_display()}->({self.id})"

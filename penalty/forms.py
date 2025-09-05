@@ -8,10 +8,21 @@ class PenaltyForm(forms.ModelForm):
         model = Penalty
         fields = '__all__'
         widgets = {
+            'borrower':forms.Select(attrs={'class': 'form-control'}),
             'status': forms.Select(attrs={'class': 'form-control'}),
             'emi': forms.Select(attrs={'class': 'form-control'}),
             'amount': forms.NumberInput(attrs={'class': 'form-control'}),
             'payment': forms.Select(attrs={'class': 'form-control'}), # Can be null
             'due_date': forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local'}),
             'remark': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+        }
+
+
+
+class UserPenaltyForm(forms.ModelForm):
+    class Meta:
+        model = Penalty
+        fields = ['remark']  # only allow user to add remarks
+        widgets = {
+            'remark': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Add your remark...'}),
         }

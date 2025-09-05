@@ -20,7 +20,7 @@ class KYC(models.Model):
         ('Rejected', 'Rejected'),
     ]
 
-    borrower = models.ForeignKey(Borrower, on_delete=models.CASCADE, related_name='kyc_details')
+    borrower = models.ForeignKey(Borrower, on_delete=models.CASCADE, related_name='kyc_details', blank=True, null=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Pending', null=False, blank=False)
     aadhar_number = models.CharField(max_length=12, unique=True, blank=True, null=True) # Aadhar can be optional
     pan_number = models.CharField(max_length=10, unique=True, blank=True, null=True) # PAN can be optional # ManyToManyField for documents, as one KYC can have multiple documents
@@ -36,3 +36,5 @@ class KYC(models.Model):
 
     def __str__(self):
         return f"KYC for {self.borrower.first_name} ({self.status})"
+    
+        

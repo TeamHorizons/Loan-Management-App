@@ -1,6 +1,6 @@
 from django import forms
 from emi.models import EMI
-
+from payment.models import Payment
 
 
 # EMI Form
@@ -20,3 +20,4 @@ class EMIForm(forms.ModelForm):
             'remark': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
             'penalty': forms.Select(attrs={'class': 'form-control'}), # Can be null
         }
+

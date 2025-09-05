@@ -22,7 +22,7 @@ class LoanTicket(models.Model):
         ('Defaulted', 'Defaulted'),
     ]
 
-    borrower = models.ForeignKey(Borrower, on_delete=models.CASCADE, related_name='loan_tickets')
+    borrower = models.ForeignKey(Borrower, on_delete=models.CASCADE, related_name='loanticket_details', blank=True, null=True)
     loan_type = models.CharField(max_length=50, null=False, blank=False)
     loan_amount = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False)
     loan_tenure_in_months = models.IntegerField(null=False, blank=False)
@@ -39,4 +39,4 @@ class LoanTicket(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f"Loan {self.id} for {self.borrower.first_name} - {self.loan_amount} ({self.status})"
+        return f"Loan {self.id} for {self.borrower.first_name} - {self.borrower.user_profile} - ({self.status})"

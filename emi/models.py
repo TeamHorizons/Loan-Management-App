@@ -1,9 +1,8 @@
 from django.db import models
-from django.utils import timezone
 
+from borrower.models import Borrower
 from payment.models import Payment
 from loan_ticket.models import LoanTicket
-import json # For handling array-like fields for non-PostgreSQL databases
 
 # Create your models here.
 
@@ -20,7 +19,7 @@ class EMI(models.Model):
         ('Overdue', 'Overdue'),
         ('Waived', 'Waived'),
     ]
-
+    borrower = models.ForeignKey(Borrower, on_delete=models.CASCADE, related_name='emi_details', blank=True, null=True)
     loan_ticket = models.ForeignKey(LoanTicket, on_delete=models.CASCADE, related_name='emis')
     emi_no = models.IntegerField(null=False, blank=False)
     emi_amount = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False)

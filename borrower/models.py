@@ -40,4 +40,4 @@ class Borrower(models.Model):
         ordering = ['-created_at'] # Order by creation date, newest first
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} ({self.mobile})"
+        return f"{self.user_profile} | User Mobile:({self.mobile})"
