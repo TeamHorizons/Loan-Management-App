@@ -48,10 +48,7 @@ INSTALLED_APPS = [
     'payment',
     'penalty',
     'user',
-<<<<<<< HEAD:loan_app_02/loan_app_02/settings.py
     'loan',
-=======
->>>>>>> 8e0c905415d69bf70ef1a3d4667d0ba1cf1625c3:loan_app_02/settings.py
     # third party dependencies
     'crispy_forms',
     'crispy_bootstrap5',
@@ -169,7 +166,6 @@ EMAIL_USE_TLS = True
 # Load credentials from .env
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')  # 16-digit app password
-
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 

@@ -48,10 +48,7 @@ INSTALLED_APPS = [
     'payment',
     'penalty',
     'user',
-<<<<<<< HEAD:loan_app_02/loan_app_02/settings.py
     'loan',
-=======
->>>>>>> 8e0c905415d69bf70ef1a3d4667d0ba1cf1625c3:loan_app_02/settings.py
     # third party dependencies
     'crispy_forms',
     'crispy_bootstrap5',
