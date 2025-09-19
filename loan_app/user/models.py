@@ -35,7 +35,7 @@ class UserProfile(AbstractUser):
     )
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ['username']  # required for superuser
+    REQUIRED_FIELDS = ['username', 'phone_number']  # required for superuser
 
     def __str__(self):
         return f"User-{self.username} | User Email:{self.email}"
