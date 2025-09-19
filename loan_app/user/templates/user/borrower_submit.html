@@ -73,14 +73,6 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="{{ form.pincode.id_for_label }}" class="form-label">Pincode</label>
-                    {{ form.pincode }}
-                    {% for error in form.pincode.errors %}
-                        <div class="text-danger small">{{ error }}</div>
-                    {% endfor %}
-                </div>
                 <div class="col-md-6 mb-3">
                     <label for="{{ form.address.id_for_label }}" class="form-label">Address</label>
                     {{ form.address }}
@@ -99,23 +91,20 @@
                         <div class="text-danger small">{{ error }}</div>
                     {% endfor %}
                 </div>
-                <div class="col-md-6 mb-3">
-                    <label for="{{ form.ifsc_code.id_for_label }}" class="form-label">IFSC Code</label>
-                    {{ form.ifsc_code }}
-                    {% for error in form.ifsc_code.errors %}
-                        <div class="text-danger small">{{ error }}</div>
-                    {% endfor %}
-                </div>
             </div>
 
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label for="{{ form.bank_name.id_for_label }}" class="form-label">Bank Name</label>
-                    {{ form.bank_name }}
+                    <label for="branchDropdown" class="form-label">Bank Name</label>
+                    <select name="{{ form.bank_name.name }}" id="branchDropdown" class="form-control">
+                        <option value="">-- Select a Bank --</option>
+                    </select>
                     {% for error in form.bank_name.errors %}
                         <div class="text-danger small">{{ error }}</div>
                     {% endfor %}
                 </div>
+
+
                 <div class="col-md-6 mb-3">
                     <label for="{{ form.branch_name.id_for_label }}" class="form-label">Branch Name</label>
                     {{ form.branch_name }}

@@ -9,13 +9,12 @@ from datetime import timedelta
 class LoanTicketForm(forms.ModelForm):
     class Meta:
         model = LoanTicket
-        fields = ['borrower','loan_type', 'loan_tenure_in_months',
+        fields = ['loan_type', 'loan_tenure',
                 'interest_rate', 'start_date', 'end_date', 'status', 'remark',]
         widgets = {
-            'borrower':forms.Select(attrs={'class': 'form-control'}),
             'loan_type': forms.TextInput(attrs={'class': 'form-control'}),
             'loan_amount': forms.NumberInput(attrs={'class': 'form-control'}),
-            'loan_tenure_in_months': forms.NumberInput(attrs={'class': 'form-control'}),
+            'loan_tenure': forms.NumberInput(attrs={'class': 'form-control'}),
             'interest_rate': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.01'}),
             'start_date': forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local'}),
             'end_date': forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local'}),
@@ -28,12 +27,11 @@ class LoanTicketForm(forms.ModelForm):
 class LoanTicketSubmit(forms.ModelForm):
     class Meta:
         model = LoanTicket
-        fields = ['loan_type', 'loan_amount', 'loan_tenure_in_months', 'start_date']  
+        fields = ['loan_type', 'loan_amount', 'loan_tenure', 'start_date']  
         widgets = {
-            'loan_type': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Type of Loan'}),
+            'loan_type': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Type of Loan'}),
             'loan_amount': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Loan Amount'}),
-            'loan_tenure_in_months': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Tenure (months)'}),
-            'start_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'loan_tenure': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Loan Tenure'}),
         }
 
     def save(self, commit=True):

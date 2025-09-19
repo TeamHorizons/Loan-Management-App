@@ -7,12 +7,11 @@ from kyc.models import  KYC
 class KYCForm(forms.ModelForm):
     class Meta:
         model = KYC
-        fields = '__all__'
+        fields = ['status','BVN_number', 'TIN_number','documents', 'remark']
         widgets = {
-            'borrower': forms.Select(attrs={'class': 'form-control'}),
             'status': forms.Select(attrs={'class': 'form-control'}),
-            'aadhar_number': forms.TextInput(attrs={'class': 'form-control'}),
-            'pan_number': forms.TextInput(attrs={'class': 'form-control'}),
+            'BVN_number': forms.TextInput(attrs={'class': 'form-control'}),
+            'TIN_number': forms.TextInput(attrs={'class': 'form-control'}),
             'documents': forms.SelectMultiple(attrs={'class': 'form-control'}), # For ManyToMany
             'completion_date': forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local'}),
             'remark': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
@@ -24,22 +23,23 @@ class KYCSubmit(forms.ModelForm):
     class Meta:
         model = KYC
         fields = [
-            'aadhar_number',
-            'pan_number',
+            'BVN_number',
+            'TIN_number',
             'documents',
             'remark',
         ]
         widgets = {
-            'aadhar_number': forms.TextInput(attrs={
+            'BVN_number': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Enter your Aadhar Number',
+                'placeholder': 'Enter your BVN Number',
                 'maxlength': '12'
             }),
-            'pan_number': forms.TextInput(attrs={
+            'TIN_number': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Enter your PAN Number',
+                'placeholder': 'Enter your TIN Number',
                 'maxlength': '10'
             }),
+
             'documents': forms.SelectMultiple(attrs={
                 'class': 'form-control'
             }),
@@ -53,6 +53,6 @@ class KYCSubmit(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['aadhar_number'].required = True
-        self.fields['pan_number'].required = True
+        self.fields['BVN_number'].required = True
+        self.fields['TIN_number'].required = True
         self.fields['documents'].required = True

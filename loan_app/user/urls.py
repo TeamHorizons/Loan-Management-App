@@ -15,5 +15,6 @@ urlpatterns = [
     path('penalty/list/', views.penalty_list, name='user_penalty'),
     path('penalties/<int:pk>/', views.penalty_detail, name='user_penalty_detail'),
     path('loan/summary/', views.loan_summary, name='loan_summary'),
+    path("banks/", views.get_banks, name="banks-list"),
     
 ]

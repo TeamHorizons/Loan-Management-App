@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     # third party dependencies
     'crispy_forms',
     'crispy_bootstrap5',
+    # django rest framework
+    'rest_framework'
 ]
 
 """
@@ -149,6 +151,12 @@ STATICFILES_DIRS=[
     BASE_DIR / 'loan_app/static/'
 ]
 
+"""
+handels image pact
+"""
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -156,7 +164,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # EMAIL BACKEND SETUP
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # SMTP configuration for Gmail
 EMAIL_HOST = 'smtp.gmail.com'

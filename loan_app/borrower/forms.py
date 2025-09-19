@@ -8,7 +8,7 @@ class BorrowerForm(forms.ModelForm):
         model = Borrower
         fields = ['user_profile','first_name', 'last_name', 'mobile',
                 'alternate_mobile', 'state',  'district',
-                'pincode','address','ifsc_code','bank_name','branch_name'] # Include all fields from the model
+                'address','bank_name','branch_name'] # Include all fields from the model
         widgets = {
             'user_profile':forms.SelectMultiple(attrs={'class':'form-control'}),
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
@@ -17,11 +17,9 @@ class BorrowerForm(forms.ModelForm):
             'alternate_mobile': forms.TextInput(attrs={'class': 'form-control'}),
             'state': forms.TextInput(attrs={'class': 'form-control'}),
             'district': forms.TextInput(attrs={'class': 'form-control'}),
-            'pincode': forms.TextInput(attrs={'class': 'form-control'}),
             'address': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
             'account_number': forms.TextInput(attrs={'class': 'form-control'}),
-            'ifsc_code': forms.TextInput(attrs={'class': 'form-control'}),
-            'bank_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'bank_name': forms.Select(attrs={'class': 'form-control'}),
             'branch_name': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
@@ -36,10 +34,8 @@ class BorrowerSubmit(forms.ModelForm):
             'alternate_mobile',
             'state',
             'district',
-            'pincode',
             'address',
             'account_number',
-            'ifsc_code',
             'bank_name',
             'branch_name',
         ]
@@ -68,10 +64,6 @@ class BorrowerSubmit(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Enter District'
             }),
-            'pincode': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter Pincode'
-            }),
             'address': forms.Textarea(attrs={
                 'class': 'form-control',
                 'placeholder': 'Enter Full Address',
@@ -81,13 +73,9 @@ class BorrowerSubmit(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Enter Bank Account Number'
             }),
-            'ifsc_code': forms.TextInput(attrs={
+            'bank_name': forms.ChoiceField(attrs={
                 'class': 'form-control',
-                'placeholder': 'Enter IFSC Code'
-            }),
-            'bank_name': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter Bank Name'
+                'placeholder': 'Select a Bank'
             }),
             'branch_name': forms.TextInput(attrs={
                 'class': 'form-control',

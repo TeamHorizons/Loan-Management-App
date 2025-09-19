@@ -7,7 +7,17 @@ from payment.models import Payment
 class EMIForm(forms.ModelForm):
     class Meta:
         model = EMI
-        fields = '__all__'
+        fields = ['loan_ticket',
+                'emi_no',
+                'emi_amount',
+                'outstanding_amount',
+                'start_date',
+                'end_date',
+                'payment',
+                'status',
+                'remark',
+                'penalty',
+                ]
         widgets = {
             'loan_ticket': forms.Select(attrs={'class': 'form-control'}),
             'emi_no': forms.NumberInput(attrs={'class': 'form-control'}),
