@@ -64,6 +64,7 @@
                         <div class="text-danger small">{{ error }}</div>
                     {% endfor %}
                 </div>
+
                 <div class="col-md-6 mb-3">
                     <label for="{{ form.district.id_for_label }}" class="form-label">District</label>
                     {{ form.district }}
@@ -71,7 +72,6 @@
                         <div class="text-danger small">{{ error }}</div>
                     {% endfor %}
                 </div>
-            </div>
 
                 <div class="col-md-6 mb-3">
                     <label for="{{ form.address.id_for_label }}" class="form-label">Address</label>
@@ -91,13 +91,13 @@
                         <div class="text-danger small">{{ error }}</div>
                     {% endfor %}
                 </div>
-            </div>
+            
 
-            <div class="row">
+            
                 <div class="col-md-6 mb-3">
                     <label for="branchDropdown" class="form-label">Bank Name</label>
-                    <select name="{{ form.bank_name.name }}" id="branchDropdown" class="form-control">
-                        <option value="">-- Select a Bank --</option>
+                    <select name="{{ form.bank_name.name }}" id="branchDropdown" class="form-control" data-banks-url="{% url 'banks-list' %}" data-selected-bank="{{ form.bank_name.value|default:'' }}"> 
+                        <option value="">Select a Bank</option>
                     </select>
                     {% for error in form.bank_name.errors %}
                         <div class="text-danger small">{{ error }}</div>
@@ -123,7 +123,34 @@
                 </a>
             </div>
     </form>
-
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", async function() {
+    const select = document.getElementById("branchDropdown");
+    if (!select) return;
+
+    const banksUrl = select.dataset.banksUrl; // now properly rendered
+    const selectedBank = select.dataset.selectedBank || "";
+
+    try {
+        const response = await fetch(banksUrl);
+        const data = await response.json();
+
+        if (data.banks) {
+            data.banks.forEach(bank => {
+                const option = document.createElement("option");
+                option.value = bank.code;
+                option.textContent = bank.name;
+                if (bank.name === selectedBank) option.selected = true;
+                select.appendChild(option);
+            });
+        } else {
+            console.error("No banks received:", data);
+        }
+    } catch (error) {
+        console.error("Error fetching banks:", error);
+    }
+});
+</script>
 {%endblock content%}

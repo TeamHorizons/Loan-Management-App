@@ -73,7 +73,7 @@ class BorrowerSubmit(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Enter Bank Account Number'
             }),
-            'bank_name': forms.ChoiceField(attrs={
+            'bank_name': forms.Select(attrs={
                 'class': 'form-control',
                 'placeholder': 'Select a Bank'
             }),

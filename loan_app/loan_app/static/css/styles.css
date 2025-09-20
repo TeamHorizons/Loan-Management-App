@@ -78,6 +78,10 @@ body {
     border-radius: 20px;
     padding: 25px;
 }
+.hero .hero-text{
+    text-align: center;
+    margin-bottom: 2rem;
+}
 .img{
     width:100%;
     height:50vh ;
@@ -90,6 +94,14 @@ img.img{
 }
 .btn.hero-btn{
     border-radius: 50px;
+}
+
+@media (min-width:992px){
+    .hero{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 

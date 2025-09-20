@@ -2,7 +2,7 @@ import os
 import requests
 import time
 
-PAYSTACK_SECRET_KEY = os.getenv("PAYSTACK_SECRET_KEY", "")
+PAYSTACK_SECRET_KEY = os.getenv("PAYSTACK_SECRET_KEY")
 
 # Simple in-memory cache
 _bank_cache = {"timestamp": 0, "data": []}

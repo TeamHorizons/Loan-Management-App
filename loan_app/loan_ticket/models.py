@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils import timezone
+import uuid
 
 from borrower.models import Borrower
 import json # For handling array-like fields for non-PostgreSQL databases
@@ -60,7 +60,7 @@ class LoanTicket(models.Model):
     loan_amount = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False)
     loan_tenure = models.CharField(null=False, blank=False , choices=LOAN_TENURE_CHOICES, default='one month')
     interest_rate = models.DecimalField(max_digits=5, decimal_places=2, null=False, blank=False) # Changed from 3,2 to 5,2 for more flexibility
-    transaction_id = models.UUIDField(null=True, auto_created=True, unique=True, max_length=12, help_text='An automatic generated identification number(s) for a transaction')
+    transaction_id = models.UUIDField(null=True, auto_created=True, unique=True, max_length=12, default=uuid.uuid4, editable=False, help_text='An automatic generated identification number(s) for a transaction')
     start_date = models.DateTimeField(null=False, blank=False)
     end_date = models.DateTimeField(null=False, blank=False)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Ongoing', null=False, blank=False)

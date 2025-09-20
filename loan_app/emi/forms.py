@@ -11,8 +11,6 @@ class EMIForm(forms.ModelForm):
                 'emi_no',
                 'emi_amount',
                 'outstanding_amount',
-                'start_date',
-                'end_date',
                 'payment',
                 'status',
                 'remark',

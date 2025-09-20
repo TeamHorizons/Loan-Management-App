@@ -3,7 +3,7 @@ from dateutil.relativedelta import relativedelta
 
 def create_emis_for_loan(loan_ticket):
     total_amount = loan_ticket.loan_amount      
-    duration = loan_ticket.loan_tenure_in_months        
+    duration = loan_ticket.loan_tenure     
     emi_amount = total_amount / duration
     start_date = loan_ticket.start_date
 

@@ -1,11 +1,8 @@
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from custom.services import fetch_nigerian_banks
 
 """
 a custom function that automatically generates emis
 """
-from .utils import create_emis_for_loan
+from custom.utils import create_emis_for_loan
 """
 Import neccessery forms
 """
@@ -371,6 +368,9 @@ def apply_for_loan(request):
     ...
 
 
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from custom.services import fetch_nigerian_banks
 """
 Gets list of Banks
 """
@@ -380,4 +380,4 @@ def get_banks(request):
 
     if success:
         return Response({"banks": result}, status=200)
-    return Response({"error": result}, status=500)
+    return Response({"error": result}, status=400)

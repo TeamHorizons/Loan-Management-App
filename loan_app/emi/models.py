@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 
 from borrower.models import Borrower
@@ -48,7 +49,7 @@ class EMI(models.Model):
     This would make it a OneToOneField or a ForeignKey with `null=True`.
     To resolve the circular dependency, I'll make it a ForeignKey with `null=True, blank=True`.
     """
-    transaction_id = models.UUIDField(null=False, auto_created=True, unique=True, max_length=12, help_text='An automatic generated identification number(s) for a transaction')
+    transaction_id = models.UUIDField(null=False, auto_created=True, unique=True, max_length=12, default=uuid.uuid4, editable=False, help_text='An automatic generated identification number(s) for a transaction')
     payment = models.ForeignKey(Payment, on_delete=models.SET_NULL, null=True, blank=True, related_name='emi_settled_by_payment')
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Pending', null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
