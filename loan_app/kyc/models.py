@@ -21,9 +21,9 @@ class KYC(models.Model):
 
     borrower = models.ForeignKey(Borrower, on_delete=models.CASCADE, related_name='kyc_details', blank=True, null=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Pending', null=False, blank=False)
-    bvn_number = models.CharField(null=True, blank=True, unique=True, max_length=11, validators=[validate_bvn], help_text="Bank Verification Number")
-    tin_number = models.CharField(null=True, blank=True, unique=True, max_length=12, validators=[validate_tin], help_text="TAX Identification Number")
-    documents = models.ManyToManyField(Document, blank=True, related_name='kyc_associations') # ManyToManyField for documents, as one KYC can have multiple documents
+    bvn_number = models.CharField(null=True, blank=False, unique=True, max_length=11, validators=[validate_bvn], help_text="Bank Verification Number")
+    tin_number = models.CharField(null=True, blank=False, unique=True, max_length=12, validators=[validate_tin], help_text="TAX Identification Number")
+    documents = models.ForeignKey(Document, blank=False, null=True, on_delete=models.CASCADE, related_name='kyc_associations') # ManyToManyField for documents, as one KYC can have multiple documents
     completion_date = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     remark = models.TextField(blank=True, null=True)

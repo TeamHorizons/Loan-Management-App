@@ -23,15 +23,17 @@
                         {% for emi in emis %}
                         <tr>
                             <td><span class="badge bg-secondary">{{ emi.emi_no }}</span></td>
-                            <td><strong>${{ emi.emi_amount|floatformat:2 }}</strong></td>
-                            <td>${{ emi.outstanding_amount|floatformat:2 }}</td>
+                            <td><strong>₦{{ emi.emi_amount|floatformat:2 }}</strong></td>
+                            <td>₦{{ emi.outstanding_amount|floatformat:2 }}</td>
                             <td>
                                 {% if emi.status == "Paid" %}
                                     <span class="badge bg-success">Paid</span>
                                 {% elif emi.status == "Pending" %}
                                     <span class="badge bg-warning text-dark">Pending</span>
-                                {% else %}
+                                {% elif emi.status == "Overdue" %}
                                     <span class="badge bg-danger">Overdue</span>
+                                {%else%}
+                                    <span class="badge bg-info">Waived</span>
                                 {% endif %}
                             </td>
                             <td>{{ emi.start_date|date:"M d, Y" }}</td>

@@ -29,7 +29,6 @@
             </div>
             <div class="col-md-6">
                 <p><strong>Address:</strong> {{ borrower.address }}</p>
-                <p><strong>Pincode:</strong> {{ borrower.pincode }}</p>
                 <p><strong>District:</strong> {{ borrower.district }}</p>
                 <p><strong>State:</strong> {{ borrower.state }}</p>
             </div>
@@ -45,7 +44,6 @@
         <div class="row">
             <div class="col-md-6">
                 <p><strong>Account Number:</strong> {{ borrower.account_number }}</p>
-                <p><strong>IFSC Code:</strong> {{ borrower.ifsc_code }}</p>
             </div>
             <div class="col-md-6">
                 <p><strong>Bank Name:</strong> {{ borrower.bank_name }}</p>
@@ -75,7 +73,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for loan in borrower.loan_tickets.all %}
+                        {% for loan in borrower.loan_ticket.all %}
                             <tr>
                                 <td>{{ loan.id }}</td>
                                 <td>{{ loan.loan_type }}</td>
@@ -110,8 +108,8 @@
                     <thead class="table-light">
                         <tr>
                             <th>Status</th>
-                            <th>Aadhar Number</th>
-                            <th>PAN Number</th>
+                            <th>BVN Number</th>
+                            <th>TIN NUMBER</th>
                             <th>Completion Date</th>
                             <th>Actions</th>
                         </tr>
@@ -120,8 +118,8 @@
                         {% for kyc in borrower.kyc_details.all %}
                             <tr>
                                 <td><span class="badge bg-{% if kyc.status == 'Verified' %}success{% elif kyc.status == 'Pending' %}warning{% else %}danger{% endif %}">{{ kyc.status }}</span></td>
-                                <td>{{ kyc.aadhar_number|default:"N/A" }}</td>
-                                <td>{{ kyc.pan_number|default:"N/A" }}</td>
+                                <td>{{ kyc.bvn_number|default:"N/A" }}</td>
+                                <td>{{ kyc.tin_number|default:"N/A" }}</td>
                                 <td>{{ kyc.completion_date|date:"Y-m-d"|default:"N/A" }}</td>
                                 <td>
                                     <a href="{% url 'kyc_detail' kyc.pk %}" class="btn btn-info btn-sm" title="View KYC Details">

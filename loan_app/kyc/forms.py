@@ -11,8 +11,7 @@ class KYCForm(forms.ModelForm):
         widgets = {
             'status': forms.Select(attrs={'class': 'form-control'}),
             'bvn_number': forms.TextInput(attrs={'class': 'form-control'}),
-            'tin_number': forms.TextInput(attrs={'class': 'form-control'}),
-            'documents': forms.SelectMultiple(attrs={'class': 'form-control'}), # For ManyToMany
+            'tin_number': forms.TextInput(attrs={'class': 'form-control'}), # For ManyToMany
             'completion_date': forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local'}),
             'remark': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
         }
@@ -25,8 +24,6 @@ class KYCSubmit(forms.ModelForm):
         fields = [
             'bvn_number',
             'tin_number',
-            'documents',
-            'remark',
         ]
         widgets = {
             'bvn_number': forms.TextInput(attrs={
@@ -39,20 +36,9 @@ class KYCSubmit(forms.ModelForm):
                 'placeholder': 'Enter your TIN Number',
                 'maxlength': '10'
             }),
-
-            'documents': forms.SelectMultiple(attrs={
-                'class': 'form-control'
-            }),
-
-            'remark': forms.Textarea(attrs={
-                'class': 'form-control',
-                'placeholder': 'Add any additional remarks (optional)',
-                'rows': 3
-            }),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['bvn_number'].required = True
         self.fields['tin_number'].required = True
-        self.fields['documents'].required = True

@@ -16,10 +16,10 @@ class BorrowerAdmin(admin.ModelAdmin):
             'fields': ('first_name', 'last_name', 'mobile', 'alternate_mobile')
         }),
         ('Address Details', {
-            'fields': ('address', 'pincode', 'district', 'state')
+            'fields': ('address', 'district', 'state')
         }),
         ('Bank Details', {
-            'fields': ('account_number', 'ifsc_code', 'bank_name', 'branch_name')
+            'fields': ('account_number', 'bank_name', 'branch_name')
         }),
         ('Timestamps', {
             'fields': ('created_at',),

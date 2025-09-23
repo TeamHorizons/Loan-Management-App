@@ -1,8 +1,16 @@
 from django.contrib import admin
 
-from .models import LoanTicket
+from .models import LoanTicket, LoanSettings
 
 # Register your models here.
+@admin.register(LoanSettings)
+class LoanSettingsAdmin(admin.ModelAdmin):
+    list_display = ('interest_rate', 'updated_at')
+
+    # This ensures the admin can't create multiple LoanSettings records
+    def has_add_permission(self, request):
+        # Only allow adding if no LoanSettings exist
+        return not LoanSettings.objects.exists() or super().has_add_permission(request)
 
 
 @admin.register(LoanTicket)

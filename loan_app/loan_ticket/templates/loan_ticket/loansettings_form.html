@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{%load crispy_forms_tags%}
+{%block content%}
+<div class="container">
+    {% for field in form %}
+    <form action="#" method="post">
+        {%csrf_token%}
+        {{form.interest_rate}}
+    </form>
+    {%endfor%}
+</div>
+
+{%endblock content%}
