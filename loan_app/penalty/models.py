@@ -3,8 +3,7 @@ from django.utils import timezone
 
 from payment.models import Payment
 from borrower.models import Borrower
-
-import json # For handling array-like fields for non-PostgreSQL databases
+from loan.models import TransactionId
 
 
 # Create your models here.
@@ -26,6 +25,7 @@ class Penalty(models.Model):
     emi = models.ForeignKey("emi.EMI", on_delete=models.CASCADE, related_name='penalties')
     amount = models.DecimalField(max_digits=11, decimal_places=2, null=False, blank=False)# payment_id here refers to the payment that settled this penalty.# It can be null if the penalty is not yet paid.
     payment = models.ForeignKey(Payment, on_delete=models.SET_NULL, null=True, blank=True, related_name='penalties_paid')
+    transaction_id = models.ForeignKey(TransactionId, on_delete=models.CASCADE, related_name='penalty_trans_id', null=True)
     due_date = models.DateTimeField(blank=True, null=True)
     remark = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True) # Added created_at as per other tables

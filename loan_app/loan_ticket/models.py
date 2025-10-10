@@ -1,11 +1,6 @@
 from django.db import models
-import uuid
 from borrower.models import Borrower
-
-
-class LoanTenure(models.Model):
-    tenure = models.IntegerField(blank=False, null=False,default=1)
-    text = models.CharField(blank=False, null=False, default="ONE MONTH")
+from loan.models import TransactionId
 
 
 #Loan Settings Model
@@ -22,6 +17,7 @@ class LoanSettings(models.Model):
     class Meta:
         verbose_name = "Loan Setting"
         verbose_name_plural = "Loan Settings"
+        get_latest_by = 'updated_at'
 
 
 # Create your models here.
@@ -63,9 +59,9 @@ class LoanTicket(models.Model):
     borrower = models.ForeignKey(Borrower, on_delete=models.CASCADE, related_name='loanticket_details', blank=True, null=True)
     loan_type = models.CharField(max_length=50, null=False, blank=False, choices=LOAN_TYPE_CHOICES, default='personal loan')
     loan_amount = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False)
-    loan_tenure = models.ForeignKey(LoanTenure, on_delete=models.CASCADE, related_name='loantenure_details', null=False, blank=False,)
+    loan_tenure = models.PositiveIntegerField(help_text="Enter loan tenure in months")
     interest_rate = models.DecimalField(max_digits=5, decimal_places=2, null=False, blank=False) # Changed from 3,2 to 5,2 for more flexibility
-    transaction_id = models.UUIDField(null=True, auto_created=True, unique=True, max_length=12, default=uuid.uuid4, editable=False, help_text='An automatic generated identification number(s) for a transaction')
+    transaction_id = models.ForeignKey(TransactionId, on_delete=models.CASCADE,  related_name='loanticket_trans_id', null=True)
     start_date = models.DateTimeField(null=False, blank=False)
     end_date = models.DateTimeField(null=False, blank=False)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Ongoing', null=False, blank=False)

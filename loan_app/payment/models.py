@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils import timezone
-import uuid
-
+from loan.models import TransactionId
 
 # Create your models here.
 
@@ -32,7 +31,7 @@ class Payment(models.Model):
     # then `emi` should be null=True. Given the SQL, it's NOT NULL.
     # We will assume a payment is always tied to an EMI.
     """
-    transaction_id = models.UUIDField(null=False, auto_created=True, unique=True, max_length=12, default=uuid.uuid4, editable=False, help_text='An automatic generated identification number(s) for a transaction')
+    transaction_id = models.ForeignKey(TransactionId, on_delete=models.CASCADE, related_name='payment_trans_id', null=True)
     emi = models.ForeignKey('emi.EMI', on_delete=models.SET_NULL, null=True, blank=True, related_name='payments_made')
     bank_reference_id = models.CharField(max_length=50, null=False, blank=False, unique=True) # Assuming unique
     payment_date = models.DateTimeField(blank=True, null=True) # Can be set later

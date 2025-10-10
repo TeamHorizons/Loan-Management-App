@@ -83,7 +83,7 @@
         </div>
 
         <!-- Search form query by transaction id -->
-        <form class="d-flex ms-md-3 mt-3 mt-lg-0" role="search" method="GET" action="{#%url 'search_transaction'%#}">
+        <form class="d-flex ms-md-3 mt-3 mt-lg-0" role="search" method="GET" action="{#%url 'transactionid_result'%#}">
             {% csrf_token %}
             <input class="form-control mx-3" type="search" name="query" placeholder="Search..." aria-label="Search">
             <button class="btn btn-outline-light" type="submit">Search</button>

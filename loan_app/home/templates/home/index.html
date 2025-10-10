@@ -1,5 +1,46 @@
 {%extends 'main.html' %}
 {%load static%}
+
+{%block extra_style%}
+    <style>
+        body {
+         background: /*linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), */
+                    url('static/images/loan-man.jpg') no-repeat center center fixed;
+        background-size: cover;
+        color: #fff;
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        backdrop-filter: blur(2.5px);
+        }
+
+        .hero, .hero > * {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        text-align: center;
+        }
+
+        .hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #fff;
+        }
+
+        .hero p {
+        font-size: 1.1rem;
+        color: #000;
+        max-width: 600px;
+        }
+    </style>
+{%endblock extra_style%}
+
 {%block content%}
     {%if messages%}
         <div class="message mb-3 container">
@@ -13,14 +54,12 @@
 
         <div class="container hero">
             <div class="hero-text">
-                <h1 class="text-dark">Welcome to The Loan Management App</h1>
+                <h1>Welcome to The Loan Management App</h1>
                 <p class="fw-semibold">Providing you with accessible loans at all times</p>
-                <a href="{%url 'loan_apply'%}" class="btn btn-outline-info hero-btn fw-semibold px-3">Apply For Loan</a>
-            </div>
-
-            <div class="hero-img">
-                <img src="{%static 'images/loan-man.jpg'%}" alt="image of a loan advisor" class="img">
-
+                <a href="{%url 'loan_apply'%}" class="btn hero-btn fw-semibold px-3">Apply For Loan</a>
             </div>
         </div>
+        <script>
+            const body = document.querySelector('body')
+        </script>
 {%endblock content%}

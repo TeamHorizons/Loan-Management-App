@@ -2,13 +2,15 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import get_object_or_404
+from django.contrib import messages
 """
 Import Models
 """
 from emi.models import EMI
 from borrower.models import Borrower
-from loan_ticket.models import LoanTicket
+from loan_ticket.models import LoanTicket, LoanSettings
 from loan.models import Loan
+
 
 # Create your views here.
 
@@ -23,6 +25,7 @@ def admin_index(request):
     total_loans = LoanTicket.objects.count()
     ongoing_loans = LoanTicket.objects.filter(status='Ongoing').count()
     pending_emis = EMI.objects.filter(status='Pending').count()
+    interest_rate = LoanSettings.objects.last()
     pending_loans = Loan.objects.filter(status="PENDING").count()  # for new card
 
 
@@ -32,6 +35,7 @@ def admin_index(request):
         'total_loans': total_loans,
         'ongoing_loans': ongoing_loans,
         'pending_emis': pending_emis,
+        'interest_rate' : interest_rate,
         "pending_loans": pending_loans,
     }
     return render(request, 'home/admin.html', context)
@@ -64,6 +68,11 @@ def loan_approval_detail(request, pk):
     
     return render(request, "home/loan_approval.html", {"loan": loan, 'title':template_data['title']})
 
+
+"""
+Search functionality for admin.
+searches by transaction_id's
+"""
 
 def home(request):
     template_data = {}

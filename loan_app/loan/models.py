@@ -1,6 +1,15 @@
 from django.db import models
 from django.utils import timezone
+import uuid
+
 # Create your models here.
+
+class TransactionId(models.Model):
+    transaction_id = models.UUIDField(
+        default=uuid.uuid4,
+        unique=True,
+        editable=False)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 class Loan(models.Model):
     STATUS_CHOICES = [
@@ -19,6 +28,7 @@ class Loan(models.Model):
 
     loan_amount = models.DecimalField(max_digits=10, decimal_places=2)
     tenure_months = models.IntegerField()
+    transaction_id = models.ForeignKey(TransactionId, on_delete=models.CASCADE,  related_name='loan_trans_id', null=True)
     interest_rate = models.DecimalField(max_digits=5, decimal_places=2)
 
 

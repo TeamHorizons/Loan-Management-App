@@ -23,6 +23,7 @@ from django.contrib import messages
 from django.views.decorators.http import require_http_methods, require_GET
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
+from django.utils import timezone
 
 """
 Import neccessary models
@@ -47,7 +48,8 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.encoding import force_bytes,force_str
 from django.core.mail import send_mail
 from django.conf import settings
-
+from datetime import date
+from dateutil.relativedelta import relativedelta
 
 # Create your views here.
 
@@ -239,10 +241,16 @@ def loan_ticket_submit(request):
         if form.is_valid():
             loan_ticket = form.save(commit=False)
             loan_ticket.borrower = borrower
+            loan_ticket.start_date = date.today()
+
+            # Calculate end_date based on tenure
+            tenure = loan_ticket.loan_tenure # make sure your form/model has this
+            loan_ticket.end_date = loan_ticket.start_date + relativedelta(months=tenure)
             loan_ticket.save()
 
             #  Auto-create EMIs using the function from utils.py
             create_emis_for_loan(loan_ticket)
+            
 
             return redirect("loan_summary")
     else:
@@ -268,6 +276,7 @@ def loan_summary(request):
         "borrower": borrower,
         "loan": loan,
         "emis": emis,
+        'now':timezone.now,
         "title":template_data['title']
     })
 
@@ -332,7 +341,7 @@ def user_profile(request):
 
 """
 This logic checks if a user has submitted the required forms after clicking apply for loan, 
-if a user logout or was interrupted doing form submition it check what form has been submitted,
+if a user logout or was interrupted during any form submition it checks what form has been submitted,
 and skips over it. thus improving user experience.
 """
 @login_required(login_url='login')
@@ -350,8 +359,9 @@ def apply_for_loan(request):
     if not kyc:
         return redirect(reverse("kyc_submit"))
 
-    # --- Step 3: Document (M2M with KYC) ---
-    if not kyc.documents.exists():   # no linked documents yet
+    # --- Step 3: Document ---
+    document = Document.objects.filter(borrower=borrower).first()
+    if not document:  
         return redirect(reverse("document_submit"))
 
     # --- Step 4: LoanTicket (FK to Borrower) ---
@@ -372,7 +382,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from custom.services import fetch_nigerian_banks
 """
-Gets list of Banks
+Gets list of banks with a paystack api key
 """
 @api_view(["GET"])
 def get_banks(request):
@@ -380,4 +390,4 @@ def get_banks(request):
 
     if success:
         return Response({"banks": result}, status=200)
-    return Response({"error": result}, status=400)
+    return Response({"error": result}, status=404)

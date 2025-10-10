@@ -1,13 +1,14 @@
+<!-- templates/loan_ticket/loansettings_form.html -->
 {% extends 'base.html' %}
-{%load crispy_forms_tags%}
-{%block content%}
-<div class="container">
-    {% for field in form %}
-    <form action="#" method="post">
-        {%csrf_token%}
-        {{form.interest_rate}}
-    </form>
-    {%endfor%}
-</div>
+{% load crispy_forms_tags %}
 
-{%endblock content%}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-3">Adjust Loan Interest Rate</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary mt-3">Save</button>
+    </form>
+</div>
+{% endblock content %}
