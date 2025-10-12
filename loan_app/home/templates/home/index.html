@@ -1,6 +1,8 @@
 {%extends 'main.html' %}
 {%load static%}
-
+{%block head%}
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+{%endblock head%}
 {%block extra_style%}
     <style>
         body {
@@ -43,7 +45,7 @@
 
 {%block content%}
     {%if messages%}
-        <div class="message mb-3 container">
+        <div class="message mb-3 container text-center d-flex justify-content-center">
             {%for message in messages%}
             <div class="alert alert-{{message.tags}}">
                 {{message}}
@@ -52,14 +54,15 @@
         </div>
     {%endif%}
 
-        <div class="container hero">
+        <div class="container hero" data-aos="fade-up" data-aos-mirror="true" data-aos-duration="3000">
             <div class="hero-text">
                 <h1>Welcome to The Loan Management App</h1>
                 <p class="fw-semibold">Providing you with accessible loans at all times</p>
                 <a href="{%url 'loan_apply'%}" class="btn hero-btn fw-semibold px-3">Apply For Loan</a>
             </div>
         </div>
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
         <script>
-            const body = document.querySelector('body')
+            AOS.init();
         </script>
 {%endblock content%}
