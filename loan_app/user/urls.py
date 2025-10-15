@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+# password reset module
+from django.contrib.auth import views as auth_view
 urlpatterns = [
     path('signup/', views.reg_views, name='signup'),
     path('login/', views.login_view, name='login'),
@@ -16,5 +18,11 @@ urlpatterns = [
     path('penalties/<int:pk>/', views.penalty_detail, name='user_penalty_detail'),
     path('loan/summary/', views.loan_summary, name='loan_summary'),
     path("banks/", views.get_banks, name="banks-list"),
+
+    # Handels password reset process
+    path('password/reset', auth_view.PasswordResetView.as_view(template_name='user/password_reset.html'), name='reset_password'),
+    path('password/reset/done', auth_view.PasswordResetDoneView.as_view(template_name='user/password_reset_done.html'), name='password_reset_done'),
+    path('password/reset/<uidb64>/<token>/', auth_view.PasswordResetConfirmView.as_view(template_name='user/password_reset_confirm.html'), name='password_reset_confirm'),
+    path('password/reset/complete', auth_view.PasswordResetCompleteView.as_view(template_name='user/password_reset_complete.html'), name='password_reset_complete')
     
 ]

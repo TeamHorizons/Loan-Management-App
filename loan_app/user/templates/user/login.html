@@ -11,6 +11,7 @@
             {%csrf_token%}
             {%crispy login_form%}
         </form>
+        <p><a href="{%url 'reset_password'%}">Forget you password</a>? <em>click link to reset</em></p>
     </div>
     {%if messages%}
 <div class="message mt-3">

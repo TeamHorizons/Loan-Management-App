@@ -391,3 +391,4 @@ def get_banks(request):
     if success:
         return Response({"banks": result}, status=200)
     return Response({"error": result}, status=404)
+

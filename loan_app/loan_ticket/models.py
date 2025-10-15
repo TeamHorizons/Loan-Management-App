@@ -12,7 +12,7 @@ class LoanSettings(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Default Interest Rate: {self.interest_rate}%"
+        return f"Current Interest Rate: {self.interest_rate}%"
 
     class Meta:
         verbose_name = "Loan Setting"

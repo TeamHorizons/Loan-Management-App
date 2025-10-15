@@ -1,5 +1,6 @@
 from dateutil.relativedelta import relativedelta
 from django.utils import timezone
+from datetime import datetime
 from decimal import Decimal, ROUND_HALF_UP, getcontext
 from datetime import date
 from emi.models import EMI
@@ -77,8 +78,11 @@ def create_emis_for_loan(loan_ticket):
 
     last_end = start_date
     for i in range(1, duration + 1):
-        emi_start = timezone.make_aware(start_date + relativedelta(months=i - 1))
-        emi_end = timezone.make_aware(start_date + relativedelta(months=i))
+        if isinstance(start_date, date) and not isinstance(start_date, datetime):
+            start_date = datetime.combine(start_date, datetime.min.time())
+
+            emi_start = timezone.make_aware(start_date + relativedelta(months=i - 1))
+            emi_end = timezone.make_aware(start_date + relativedelta(months=i))
         # interest component for this period
         monthly_interest = (remaining_balance * (interest_rate / Decimal('100')) / Decimal('12')).quantize(
             Decimal('0.01'), rounding=ROUND_HALF_UP
@@ -142,47 +146,3 @@ def create_emis_for_loan(loan_ticket):
 
 
 
-# def calculate_emi(principal, annual_rate, tenure_months):
-#     """
-#     Returns monthly EMI based on principal, annual interest rate, and tenure.
-#     """
-#     P = Decimal(principal)
-#     R = Decimal(annual_rate) / (12 * 100)
-#     N = int(tenure_months)
-
-#     if R == 0:
-#         emi = P / N
-#     else:
-#         emi = (P * R * (1 + R) ** N) / ((1 + R) ** N - 1)
-
-#     return emi.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
-
-
-# def create_emis_for_loan(loan_ticket):
-#     """
-#     Creates EMI records for the given loan_ticket.
-#     Each EMI has unique start and end dates spaced one month apart.
-#     """
-#     total_amount = loan_ticket.loan_amount
-#     duration = loan_ticket.loan_tenure
-#     interest_rate = loan_ticket.interest_rate
-#     start_date = loan_ticket.start_date
-
-#     emi_amount = calculate_emi(total_amount, interest_rate, duration)
-
-#     for i in range(1, duration + 1):
-#         emi_start = start_date + relativedelta(months=i - 1)
-#         emi_end = start_date + relativedelta(months=i)
-
-#         EMI.objects.create(
-#             loan_ticket=loan_ticket,
-#             emi_no=i,
-#             emi_amount=emi_amount,
-#             outstanding_amount=emi_amount,
-#             start_date=emi_start,
-#             end_date=emi_end,
-#             status='Pending'
-#         )
-
-#     # return the final EMI's end date for updating the loan_ticket
-#     return emi_end

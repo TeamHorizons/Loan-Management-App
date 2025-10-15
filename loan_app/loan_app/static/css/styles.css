@@ -133,6 +133,36 @@ body {
     box-shadow: 0 0 5px 5px rgba(0,0,0,0.1);
     text-align: center;
     }
+    
 .profile-card h2 { 
     margin-top: 0; 
     } 
+
+
+@media( max-width:992px){
+    .offcanvas{
+        width: 15.627rem !important;
+        background-color: #343a40 !important;
+    }
+
+.header-nav {
+    position: relative;
+    text-decoration: none;
+    color: #0dcaf0;
+}
+
+.header-nav::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px; /* just below text */
+    width: 0;
+    height: 2px;
+    background: #0dcaf0;
+    transition: width 0.3s ease;
+}
+
+.header-nav:hover::after {
+    width: 25%;
+}
+}
