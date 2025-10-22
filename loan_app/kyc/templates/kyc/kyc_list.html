@@ -21,8 +21,8 @@
                             <th>ID</th>
                             <th>Borrower</th>
                             <th>Status</th>
-                            <th>Aadhar Number</th>
-                            <th>PAN Number</th>
+                            <th>BVN Number</th>
+                            <th>TIN Number</th>
                             <th>Completion Date</th>
                             <th>Created At</th>
                             <th>Actions</th>
@@ -34,8 +34,8 @@
                                 <td>{{ kyc.id }}</td>
                                 <td><a href="{% url 'borrower_detail' kyc.borrower.pk %}">{{ kyc.borrower.first_name }} {{ kyc.borrower.last_name }}</a></td>
                                 <td><span class="badge bg-{% if kyc.status == 'Verified' %}success{% elif kyc.status == 'Pending' %}warning{% else %}danger{% endif %}">{{ kyc.status }}</span></td>
-                                <td>{{ kyc.aadhar_number|default:"N/A" }}</td>
-                                <td>{{ kyc.pan_number|default:"N/A" }}</td>
+                                <td>{{ kyc.bvn_number|default:"N/A" }}</td>
+                                <td>{{ kyc.tin_number|default:"N/A" }}</td>
                                 <td>{{ kyc.completion_date|date:"Y-m-d"|default:"N/A" }}</td>
                                 <td>{{ kyc.created_at|date:"Y-m-d H:i" }}</td>
                                 <td>

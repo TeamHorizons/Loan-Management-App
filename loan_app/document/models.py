@@ -3,6 +3,11 @@ from borrower.models import Borrower
 
 
 # Create your models here.
+STATUS_CHOICES = [
+        ('Pending', 'Pending'),
+        ('Verified', 'Verified'),
+        ('Rejected', 'Rejected'),
+    ]
 
 DOCUMENT_CATEGORY_CHOICES = [
     ('identity', 'Proof of Identity'),
@@ -28,6 +33,7 @@ class Document(models.Model):
     document_category = models.CharField(max_length=50, choices=DOCUMENT_CATEGORY_CHOICES, default='identity')
     document_type = models.CharField(max_length=150, choices=DOCUMENT_CHOICES, default='NIN')
     document_image = models.ImageField(blank=True, null=True, upload_to='business_files/')
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Pending', null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
 

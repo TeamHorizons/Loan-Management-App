@@ -35,8 +35,8 @@
                                 <td>{{ emi.id }}</td>
                                 <td><a href="{% url 'loan_ticket_detail' emi.loan_ticket.pk %}">Loan #{{ emi.loan_ticket.id }}</a></td>
                                 <td>{{ emi.emi_no }}</td>
-                                <td>${{ emi.emi_amount|floatformat:2 }}</td>
-                                <td>${{ emi.outstanding_amount|floatformat:2 }}</td>
+                                <td>₦{{ emi.emi_amount|floatformat:2 }}</td>
+                                <td>₦{{ emi.outstanding_amount|floatformat:2 }}</td>
                                 <td><span class="badge bg-{% if emi.status == 'Pending' %}warning{% elif emi.status == 'Paid' %}success{% elif emi.status == 'Overdue' %}danger{% else %}info{% endif %}">{{ emi.status }}</span></td>
                                 <td>{{ emi.start_date|date:"Y-m-d" }}</td>
                                 <td>{{ emi.end_date|date:"Y-m-d" }}</td>

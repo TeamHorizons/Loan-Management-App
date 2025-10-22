@@ -5,6 +5,6 @@ from .models import Document
 
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):
-    list_display = ('document_category', 'document_type', 'created_at')
+    list_display = ('document_category', 'document_type', 'document_image', 'status','created_at')
     search_fields = ('document_category', 'document_type')
     readonly_fields = ('created_at',)

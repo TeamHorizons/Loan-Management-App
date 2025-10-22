@@ -24,7 +24,7 @@ class KYC(models.Model):
     bvn_number = models.CharField(null=True, blank=False, unique=True, max_length=11, validators=[validate_bvn], help_text="Bank Verification Number")
     tin_number = models.CharField(null=True, blank=False, unique=True, max_length=12, validators=[validate_tin], help_text="TAX Identification Number")
     documents = models.ForeignKey(Document, blank=False, null=True, on_delete=models.CASCADE, related_name='kyc_associations') # ManyToManyField for documents, as one KYC can have multiple documents
-    completion_date = models.DateTimeField(blank=True, null=True)
+    completion_date = models.DateTimeField(blank=True, null=True, auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
     remark = models.TextField(blank=True, null=True)
 

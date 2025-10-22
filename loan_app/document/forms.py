@@ -7,8 +7,9 @@ from document.models import Document
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document
-        fields = ['document_category', 'document_type']
+        fields = ['status','document_category', 'document_type']
         widgets = {
+            'status': forms.Select(attrs={'class': 'form-control'}),
             'document_category': forms.Select(attrs={'class': 'form-control'}),
             'document_type': forms.Select(attrs={'class': 'form-control'}),
         }

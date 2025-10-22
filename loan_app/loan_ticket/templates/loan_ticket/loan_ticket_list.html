@@ -36,20 +36,20 @@
                                 <td>{{ ticket.id }}</td>
                                 <td><a href="{% url 'borrower_detail' ticket.borrower.pk %}">{{ ticket.borrower.first_name }} {{ ticket.borrower.last_name }}</a></td>
                                 <td>{{ ticket.loan_type }}</td>
-                                <td>${{ ticket.loan_amount|floatformat:2 }}</td>
-                                <td>{{ ticket.loan_tenure_in_months }}</td>
-                                <td>{{ ticket.interest_rate|floatformat:2 }}%</td>
+                                <td>₦{{ ticket.loan_amount|floatformat:2 }}</td>
+                                <td class="text-center">{{ ticket.loan_tenure }}</td>
+                                <td class="text-center">{{ ticket.interest_rate|floatformat:2 }}%</td>
                                 <td><span class="badge bg-{% if ticket.status == 'Ongoing' %}primary{% elif ticket.status == 'Approved' %}success{% elif ticket.status == 'Rejected' %}danger{% elif ticket.status == 'Completed' %}secondary{% else %}warning{% endif %}">{{ ticket.status }}</span></td>
                                 <td>{{ ticket.start_date|date:"Y-m-d" }}</td>
                                 <td>{{ ticket.end_date|date:"Y-m-d" }}</td>
                                 <td>
-                                    <a href="{% url 'loan_ticket_detail' ticket.pk %}" class="btn btn-info btn-sm" title="View Details">
+                                    <a href="{% url 'loan_ticket_detail' ticket.pk %}" class="btn btn-info btn-sm mb-sm-2" title="View Details">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a href="{% url 'loan_ticket_update' ticket.pk %}" class="btn btn-warning btn-sm" title="Edit">
+                                    <a href="{% url 'loan_ticket_update' ticket.pk %}" class="btn btn-warning btn-sm mb-sm-2" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{% url 'loan_ticket_delete' ticket.pk %}" class="btn btn-danger btn-sm" title="Delete">
+                                    <a href="{% url 'loan_ticket_delete' ticket.pk %}" class="btn btn-danger btn-sm mb-sm-2" title="Delete">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                 </td>

@@ -22,9 +22,10 @@
     </div>
     <div class="card-body">
         <p><strong>Document ID:</strong> {{ document.id }}</p>
-        <p><strong>Document Name:</strong> {{ document.document_name }}</p>
-        <p><strong>Document Folder:</strong> {{ document.document_folder }}</p>
-        <p><strong>Created At:</strong> {{ document.created_at|date:"Y-m-d H:i" }}</p>
+        <p><strong>Document Category:</strong> {{ document.document_category|default:"N/A" }}</p>
+        <p><strong>Document Type:</strong> {{ document.document_type|default:"N/A" }}</p>
+        <strong>Document Image:</strong> {{ document.document_image|default:"N/A" }}</p>
+        <p><strong>Created At:</strong> {{ document.created_at|date:"Y-m-d H:i"|default:"N/A" }}</p>
     </div>
 </div>
 
